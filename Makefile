@@ -34,9 +34,9 @@ bench-Trie.c bench-Trie.h:
 
 
 %.$(o): %.c
-	$(CC) -c $(CPPFLAGS) $(CFLAGS) -o $@ $<
+	$(CC) -c $(CPPFLAGS) $(EXTRA_CPPFLAGS) $(CFLAGS) -o $@ $<
 
-bench-runner.$(o): CPPFLAGS := -DWORDS="\"Hallo PaCKage $(shell tr '\n' ' ' < wordlist)\"" -DITERS=1000000
+bench-runner.$(o): EXTRA_CPPFLAGS := -DWORDS="\"Hallo PaCKage $(shell tr '\n' ' ' < wordlist)\"" -DITERS=1000000
 
 $(BENCH): $(OBJECTS)
 	$(CC) $(LDFLAGS) $(CFLAGS) -o $@ $^
