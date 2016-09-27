@@ -45,7 +45,7 @@ run: $(BENCH)
 	@if [ -z "$(HOST)" ]; then \
 		./$(BENCH); \
 	else \
-		scp ./$(BENCH) $(HOST):; \
+		rsync -aP ./$(BENCH) $(HOST):; \
 		ssh $(HOST) ./$(BENCH); \
 	fi
 clean:
