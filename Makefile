@@ -27,10 +27,10 @@ bench-GPerf.c:
 	gperf --includes  --pic --readonly-tables -N GPerf wordlist > bench-GPerf.c
 
 bench-TrieCase.c bench-TrieCase.h:
-	../triehash.pl  --ignore-case  -c bench-TrieCase.c -h bench-TrieCase.h -f TrieCase wordlist
+	../triehash/triehash.pl --ignore-case  -C bench-TrieCase.c -H bench-TrieCase.h --function-name TrieCase wordlist
 
 bench-Trie.c bench-Trie.h:
-	../triehash.pl -c bench-Trie.c -h bench-Trie.h -f Trie wordlist
+	../triehash/triehash.pl -C bench-Trie.c -H bench-Trie.h --function-name Trie wordlist
 
 
 %.$(o): %.c
