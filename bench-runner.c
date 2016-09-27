@@ -4,6 +4,7 @@
 #include <stddef.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 extern int TrieCase(const char *s, size_t l);
 extern int Trie(const char *s, size_t l);
@@ -57,6 +58,7 @@ int main(int argc, char **argv)
 #endif
 
     double totals[12] = { 0 };
+    size_t bytes = 0;
 
 #ifdef WORDS
     char words[] = WORDS;
@@ -67,6 +69,7 @@ int main(int argc, char **argv)
         const char *w = argv[i];
 #endif
         size_t l = strlen(w);
+	bytes += l;
         long long loop = 0;
         if (!getenv("SHORT"))
 			printf("%-30s", w);
@@ -92,8 +95,19 @@ int main(int argc, char **argv)
     for (int i = 0; i < 9; i++) {
         printf("|%9.0f", totals[i] / max);
     }
+    printf("\n");
+    printf("%-30s", "nanosecond/byte");
+    for (int i = 0; i < 9; i++) {
+        printf("|%9.2f", totals[i] / (max * bytes));
+    }
+    printf("\n");
+    printf("%-30s", "byte/nanosecond");
+    for (int i = 0; i < 9; i++) {
+        printf("|%9.2f", max * bytes / totals[i]);
+    }
+    printf("\n");
+
     if (!getenv("SHORT")) {
-		printf("\n");
 		printf("%-30s", "word");
 		printf("|%-9s", "Trie");
 		printf("|%-9s", "TrieCase");
